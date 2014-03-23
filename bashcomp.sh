@@ -18,7 +18,7 @@ j() {
 }
 
 _cddb() {
-  arg="${COMP_WORDS[COMP_CWORD]}"
+  arg=${COMP_WORDS[COMP_CWORD]}
   COMPREPLY=($("$cddb" complete "$arg"))
   return 0
 }
