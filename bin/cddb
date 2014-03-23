@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+$:.unshift __dir__ + '/../lib'
+
+require 'cddb'
+
+db_path = Dir.home + '/.cddb'
+cddb = CDDB.new(db_path)
+CDDB::CLI.new(cddb, ARGV)
