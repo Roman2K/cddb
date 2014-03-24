@@ -37,7 +37,7 @@ class CDDB::CLI
   end
 
   def complete(pattern)
-    puts *@cddb.complete(pattern)
+    puts *@cddb.complete(pattern).map { |p| Format.short_path(p) }
   end
 
   def list
@@ -77,16 +77,24 @@ class CDDB::CLI
 private
 
   def print_entries(entries)
-    puts *Format.entries(entries.reverse)
+    puts *entries.reverse.map { |e| Format.entry e }
   end
 
   module Format
-    def self.entries(entries)
-      max = entries.map { |e| e['name'].length }.max
-      entries.map do |e|
-        diff = Time.now.to_i - e['access']
-        "%s\t%-*s\t%s" % [human_time_diff(diff), max, e['name'], e['path']]
-      end
+    YELLOW = "\e[93m"
+    GRAY   = "\e[90m"
+    RESET  = "\e[39m"
+
+    def self.entry(e)
+      diff = Time.now.to_i - e['access']
+      dir, basename = File.split(e['path'])
+      formatted_diff = "#{YELLOW}#{human_time_diff diff}"
+      formatted_path = "#{GRAY}#{short_path dir}/#{RESET}#{basename}"
+      "%s\t%s" % [formatted_diff, formatted_path]
+    end
+
+    def self.short_path(path)
+      path.sub(/^#{Regexp.escape Dir.home}/, '~')
     end
 
     def self.human_time_diff(diff)

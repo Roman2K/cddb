@@ -36,7 +36,7 @@ class CDDB
   end
 
   def delete(pattern)
-    to_delete = matches(pattern) { |e| e['path'] }.to_a
+    to_delete = matches(pattern).to_a
     @entries -= to_delete
     save
     to_delete
@@ -61,7 +61,7 @@ class CDDB
 
   def complete(pattern)
     glob = pattern.sub('~', Dir.home) + '*/'
-    matches(pattern).map { |e| e['name'] }.to_a.
+    matches(pattern).map { |e| e['path'] }.to_a.
       concat(Dir.glob(glob).map { |p| p.chomp('/') }).
       uniq
   end
@@ -95,20 +95,14 @@ private
     end
   end
 
-  def matches(pattern, &get_comparable)
-    get_comparable ||= lambda { |e| e['name'] }
-    matcher = begin
-      Regexp.new pattern, 'i'
-    rescue RegexpError
-      pattern
-    end
-    @entries.lazy.select { |e| matcher === get_comparable.call(e) }
+  def matches(pattern)
+    matcher = Regexp.new(pattern.each_char.to_a.join('.*'), 'i')
+    @entries.lazy.select { |e| matcher === e['path'] }
   end
 
   def add_entry(path)
     entry = {
       'path'    => path = File.expand_path(path),
-      'name'    => File.basename(path),
       'access'  => Time.now.to_i,
     }
     @entries << entry
