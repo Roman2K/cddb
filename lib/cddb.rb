@@ -102,7 +102,7 @@ private
 
   def add_entry(path)
     entry = {
-      'path'    => path = File.expand_path(path),
+      'path'    => File.expand_path(path),
       'access'  => Time.now.to_i,
     }
     @entries << entry
