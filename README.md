@@ -17,7 +17,7 @@ backed by a JSON database.
 1. Clone to `~/opt/cddb` for example.
 2. Add to `~/.bash_profile`:
 
-    ```
+    ```bash
     source ~/opt/cddb/bashcomp.sh
     ``` 
 
@@ -73,7 +73,7 @@ $ j ed
 
 Autocomplete works as expected:
 
-```
+```bash
 $ j ed<TAB>   # => j map/MAP-editor
 ```
 
