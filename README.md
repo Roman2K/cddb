@@ -85,14 +85,14 @@ action arg ...`:
 * `j -- find pattern` print the first match, same mechanism as used behind `j
   pattern`
 * `j -- complete pattern` print all matches, used by the shell autocompletion
-* `j -- list` prints all entries stored in the db
+* `j -- list` print all entries stored in the db
 * `j -- add path ...` manually add paths
 * `j -- delete pattern` delete entries, pattern matches paths instead of
   basenames
 * `j -- prune` clean up deleted directories and duplicates
 * `j -- gc max` keep at most `max` most recent entries
-* `j -- rebuild` resets the db by deleting and re-adding existing paths
-* `j -- clear` empties the db
+* `j -- rebuild` reset the db by deleting and re-adding existing paths
+* `j -- clear` empty the db
 
 ## Background
 
