@@ -72,13 +72,13 @@ $ j map/MAP-editor
 Next time:
 
 ```bash
-$ j ed
+$ j maped
 ```
 
 Autocomplete works as expected:
 
 ```bash
-$ j ed<TAB>   # => j map/MAP-editor
+$ j maped<TAB>   # => j ~/map/MAP-editor
 ```
 
 ## Commands
