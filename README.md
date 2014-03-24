@@ -1,13 +1,17 @@
 # cddb
 
-Simple [autojump][autojump] alternative written in Ruby with no dependencies,
-backed by a JSON database.
+Simple directory switcher written in Ruby with no dependencies, backed by a JSON database.
 
-* Switch directories typing parts of their basenames
-* Learns new directories as you go or in batch
+* Switch directories typing fuzzy [CtrlP][ctrlp]-like patterns
+* Learns about new directories as you go or in batch
 * Prioritizes most recently accessed ones when resolving names
 * Autocomplete for Bash
-* Its code is easy to understand
+* Lean code base
+
+Alternatives:
+
+* [autojump][autojump]
+* [z][z]
 
 ## Installation
 
@@ -82,26 +86,16 @@ $ j ed<TAB>   # => j map/MAP-editor
 The db is stored at `~/.cddb`. It can be inspected and manipuled with `j --
 action arg ...`:
 
-* `j -- find pattern` print the first match, same mechanism as used behind `j
-  pattern`
-* `j -- complete pattern` print all matches, used by the shell autocompletion
+* `j -- find pattern` print the first match, as used by `j pattern`
+* `j -- complete pattern` print matches, as used by the autocompletion
 * `j -- list` print all entries stored in the db
 * `j -- add path ...` manually add paths
-* `j -- delete pattern` delete entries, pattern matches paths instead of
-  basenames
+* `j -- delete pattern` delete matches
 * `j -- prune` clean up deleted directories and duplicates
 * `j -- gc max` keep at most `max` most recent entries
 * `j -- rebuild` reset the db by deleting and re-adding existing paths
 * `j -- clear` empty the db
 
-## Background
-
-Why not use autojump? Well, when I discovered autojump, I was very much
-delighted with the concept... At least my interpretation of the concept. My
-enthusiasm didn't last long. Trying to use it, I couldn't figure out how it
-saved visited directories, nor how it resolved directories from typed names.
-Maybe I didn't fully grasp its concept after all, if at all, and my expectation
-had nothing to do with autojump's purpose, as its behaviour wasn't intuitive to
-me. Regardless, autojump gave me an idea for a tool and I wrote it.
-
 [autojump]: https://github.com/joelthelion/autojump
+[z]: https://github.com/rupa/z
+[ctrlp]: https://github.com/kien/ctrlp.vim
