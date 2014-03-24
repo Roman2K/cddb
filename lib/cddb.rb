@@ -102,8 +102,8 @@ private
 
   def add_entry(path)
     entry = {
-      'path'    => File.expand_path(path),
-      'access'  => Time.now.to_i,
+      'path' => File.expand_path(path),
+      'access' => Time.now.to_i,
     }
     @entries << entry
     save
