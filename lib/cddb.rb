@@ -96,9 +96,9 @@ private
   end
 
   def matches(pattern)
-    fuzzy = pattern.each_char.to_a.map { |c| Regexp.escape(c) }.join('.*')
-    matcher = Regexp.new(fuzzy, 'i')
-    @entries.lazy.select { |e| matcher === e['path'] }
+    fuzzy = pattern.each_char.map { |c| Regexp.escape(c) }.join('.*')
+    re = Regexp.new(fuzzy, 'i')
+    @entries.lazy.select { |e| re =~ e['path'] }
   end
 
   def add_entry(path)
